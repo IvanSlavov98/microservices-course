@@ -16,10 +16,10 @@ import java.util.HashMap;
 public class CurrencyConversionController {
 
     @Autowired
-    private CurrencyExchangeProxy proxy;
+    private RestTemplate restTemplate;
 
     @Autowired
-    RestTemplate restTemplate;
+    private CurrencyExchangeProxy proxy;
 
     @GetMapping("currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
     public CurrencyConversion calculateCurrencyConversion(
