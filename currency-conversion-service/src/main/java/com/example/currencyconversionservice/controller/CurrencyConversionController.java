@@ -33,7 +33,7 @@ public class CurrencyConversionController {
 
         ResponseEntity<CurrencyConversion> response = restTemplate.
                 getForEntity("http://localhost:8000/currency-exchange/from/{from}/to/{to}",
-                CurrencyConversion.class, uriVariables);
+                        CurrencyConversion.class, uriVariables);
 
         CurrencyConversion currencyConversion = response.getBody();
 
@@ -60,7 +60,7 @@ public class CurrencyConversionController {
                 getForEntity("http://localhost:8000/currency-exchange/from/{from}/to/{to}",
                         CurrencyConversion.class, uriVariables);
 
-        CurrencyConversion currencyConversion = proxy.retrieveExchangeValue(from,to);
+        CurrencyConversion currencyConversion = proxy.retrieveExchangeValue(from, to);
 
         return new CurrencyConversion(currencyConversion.getId(),
                 currencyConversion.getFrom(),
