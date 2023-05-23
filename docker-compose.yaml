@@ -11,9 +11,11 @@ services:
       - currency-network
     depends_on:
       - naming-server
+      - db
     environment:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3307/currency_exchange?useUnicode=true&characterEncoding=utf8&useSSL=false
 
   currency-conversion:
     image: ivans23/mmv2-currency-conversion-service:0.0.1-SNAPSHOT
@@ -49,6 +51,21 @@ services:
     networks:
       - currency-network
 
+  db:
+    container_name: db
+    image: mysql
+    volumes:
+      - db:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    expose:
+      - "3307"
+    environment:
+      MYSQL_DATABASE: "currency_exchange"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "1234"
+      MYSQL_ROOT_PASSWORD: "1234"
+
   naming-server:
     image: ivans23/mmv2-naming-server:0.0.1-SNAPSHOT
     mem_limit: 700m
@@ -56,5 +73,9 @@ services:
       - "8761:8761"
     networks:
       - currency-network
+
+volumes:
+  db:
+
 networks:
   currency-network:
