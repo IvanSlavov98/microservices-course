@@ -17,8 +17,8 @@ services:
     environment:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/currency_exchange?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
-
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/currency_exchange?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+      #SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/currency_exchange?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
   currency-conversion:
     image: ivans23/mmv2-currency-conversion-service:0.0.1-SNAPSHOT
     mem_limit: 700m
